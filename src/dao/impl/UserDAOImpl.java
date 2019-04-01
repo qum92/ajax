@@ -12,7 +12,7 @@ import db.DBCon;
 public class UserDAOImpl implements UserDAO {
 	private String insertUser = "insert into user_info(ui_num, ui_name, ui_id, ui_pwd, ui_email)"
 			+ "	values(seq_ui_num.nextval,?,?,?,?)";
-	private String selectUser = "select ui_id, ui_pwd from user_info";		
+	private String selectUserByUiId = "select * from user_info where ui_id=? and ui_pwd=?";		
 	public int insertUser(Map<String, String> user) {
 		try {
 			PreparedStatement ps = DBCon.getCon().prepareStatement(insertUser);
@@ -29,34 +29,25 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
-	public boolean selectUser(Map<String, String> user) {
+	public Map<String,String> selectUserByUiId(String uiId,String uiPwd) {
 		try {
-			PreparedStatement ps = DBCon.getCon().prepareStatement(selectUser);
+			PreparedStatement ps = DBCon.getCon().prepareStatement(selectUserByUiId);
+			ps.setString(1, uiId);
+			ps.setString(2, uiPwd);
 			ResultSet rs = ps.executeQuery();
-			Map<String,String> cuser = new HashMap<>();
 			while(rs.next()) {
-			cuser.put("ui_id", rs.getString("ui_id"));
-			cuser.put("ui_pwd", rs.getString("ui_pwd"));
-			}
-			if(cuser.equals(user)) {
-				return true;
-			}else {
-				return false;
+			Map<String,String> user = new HashMap<>();
+			user.put("uiId", rs.getString("ui_id"));
+			user.put("uiName", rs.getString("ui_name"));
+			user.put("uiPwd", rs.getString("ui_pwd"));
+			user.put("uiEmail", rs.getString("ui_email"));
+			return user;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBCon.close();
 		}
-		return false;
-	}
-
-	public static void main(String[] args) {
-		UserDAO udao = new UserDAOImpl();
-		Map<String, String> user = new HashMap();
-		user.put("ui_id", "icarus");
-		user.put("ui_pwd","123456728");
-		System.out.println(udao.selectUser(user));
-		
+		return null;
 	}
 }

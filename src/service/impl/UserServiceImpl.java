@@ -11,9 +11,8 @@ public class UserServiceImpl implements UserService {
 	public int insertUser(Map<String, String> user) {
 		return udao.insertUser(user);
 	}
-	public boolean selectUser(Map<String, String> user) {
-
-		return udao.selectUser(user);
+	public Map<String, String> login(String uiId, String uiPwd) {
+		
+		return udao.selectUserByUiId(uiId,uiPwd);
 	}
-
 }
