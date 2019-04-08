@@ -60,6 +60,14 @@
     <servlet-name>AddressServlet1</servlet-name>
     <url-pattern>/addr/*</url-pattern>
   </servlet-mapping>
+      <servlet>
+    <servlet-name>AddressServlet2</servlet-name>
+    <servlet-class>servlet.AddressServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddressServlet2</servlet-name>
+    <url-pattern>/addr2/*</url-pattern>
+  </servlet-mapping>
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
@@ -67,7 +75,7 @@
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
   </jsp-config>
-  <filter>
+    <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>filter.EncodingFilter</filter-class>
     <init-param>

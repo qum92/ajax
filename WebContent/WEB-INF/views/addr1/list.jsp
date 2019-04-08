@@ -9,14 +9,15 @@
 <body>
 <script>
 	function changePageCount(obj){
-		location.href="/addr/list?page=${page}&pageCount=" + obj.value;
+		location.href="/addr/list?page=${page}&ad_dong=${param.ad_dong}&pageCount=" + obj.value;
 	}
 	function search(){
 		var ad_dong = document.querySelector('#ad_dong').value;
 		location.href="/addr/list?pageCount=${pageCount}&ad_dong=" + ad_dong;
 	}
 </script>
-<label for="ad_dong">읍면동 : </label><input type="text" name="ad_dong" id="ad_dong" >
+<label for="ad_dong">읍면동 : </label>
+<input type="text" name="ad_dong" id="ad_dong" value="${param.ad_dong}">
 <button onclick="search()">검색</button>
 <select name="pageCount" onchange="changePageCount(this)">
 	<option value="null" selected="selected">선택해주세요</option>
@@ -62,7 +63,7 @@
 		<td>${addr.ad_num}</td>
 		<td>${addr.ad_sido}</td>
 		<td>${addr.ad_gugun}</td>
-		<td>${addr.ad_dong}</td>
+		<td><a href="/addr/view?ad_num=${addr.ad_num}&page=${page}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">${addr.ad_dong}</a></td>
 		<td>${addr.ad_lee}</td>
 		<td>${addr.ad_bunji}</td>
 		<td>${addr.ad_ho}</td>
@@ -71,24 +72,24 @@
 	<tr>
 		<td colspan="7" align="center">
 				<c:if test="${p>10}">
-			<a href="/addr/list?page=${page-10}&pageCount=${pageCount}">◀</a>
+			<a href="/addr/list?page=${page-10}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">◀</a>
 		</c:if>
 			<c:if test="${1!=page}">
-				<a href="/addr/list?page=${1}&pageCount=${pageCount}">◀◀</a>
+				<a href="/addr/list?page=${1}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">◀◀</a>
 			</c:if>
 		<c:forEach var="p" begin="${sBlock}" end="${lBlock}">
 			<c:if test="${p==page}">
 			<b>[${p}]</b>
 			</c:if>
 			<c:if test="${p!=page}">
-				<a href="/addr/list?page=${p}&pageCount=${pageCount}">[${p}]</a>
+				<a href="/addr/list?page=${p}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">[${p}]</a>
 			</c:if>
 		</c:forEach>
 		<c:if test="${(totalPageCnt-10)>=page}">
-			<a href="/addr/list?page=${page+10}&pageCount=${pageCount}">▶</a>
+			<a href="/addr/list?page=${page+10}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">▶</a>
 		</c:if>
 			<c:if test="${totalPageCnt!=page}">
-				<a href="/addr/list?page=${totalPageCnt}&pageCount=${pageCount}">▶▶</a>
+				<a href="/addr/list?page=${totalPageCnt}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">▶▶</a>
 			</c:if>
 		</td>
 		</tr>
