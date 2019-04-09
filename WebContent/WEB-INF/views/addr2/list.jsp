@@ -46,10 +46,11 @@
 		document.querySelector('#addrTable').style.display='none';
 	}
 	function view(adNum){
-		xhr.open('GET','/addr2/view?ad_num=' + adNum);
+		xhr.open('GET','/addr2/view?ad_num=' + adNum);//txt, json, html, jsp
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState==4){
 				if(xhr.status==200){
+					console.log(xhr.response);
 					document.querySelector('#dView').innerHTML = xhr.response;
 				}
 			}
