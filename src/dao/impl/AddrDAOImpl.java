@@ -15,6 +15,8 @@ public class AddrDAOImpl implements AddrDAO {
 	private static String selectAddrListSql = " select * from(select rownum as rown, addr.* from(select * from address $where$ order by ad_num)addr where rownum <=?)where rown >=?";
 	private static String selectAddrCount = " select count(1) from address $where$ ";
 	private static String selectAddr = " select * from address where 1=1 and ad_num=?";
+	private static String updateAddr = " update address set ad_code=?, ad_sido=?, ad_gugun=?, ad_dong=?, ad_lee=?, ad_bunji=?, ad_ho=? where ad_num=?";
+	private static String deleteAddr = " delete address where ad_num=?";
 	
 	public List<Map<String, String>> selectAddrList(Map<String, String> addr) {
 		String adDong = addr.get("ad_dong");
@@ -101,6 +103,42 @@ public class AddrDAOImpl implements AddrDAO {
 		DBCon.close();
 	}		
 		return null;
+	}
+
+	public int updateAddr(Map<String, String> addr) {
+		try {
+			
+			PreparedStatement ps = DBCon.getCon().prepareStatement(updateAddr);
+			ps.setString(1, addr.get("adCode"));
+			ps.setString(2, addr.get("adSido"));
+			ps.setString(3, addr.get("adGugun"));
+			ps.setString(4, addr.get("adDong"));
+			ps.setString(5, addr.get("adLee"));
+			ps.setString(6, addr.get("adBunji"));
+			ps.setString(7, addr.get("adHo"));
+			ps.setString(8, addr.get("adNum"));
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCon.close();
+		}		
+		return 0;
+	}
+
+
+	public int deleteAddr(Map<String, String> addr) {
+		PreparedStatement ps;
+		try {
+			ps = DBCon.getCon().prepareStatement(deleteAddr);
+			ps.setString(1, addr.get("adNum"));
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBCon.close();
+		}		
+		return 0;
 	}
 
 }

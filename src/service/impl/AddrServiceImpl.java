@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,5 +72,30 @@ public class AddrServiceImpl implements AddrService {
 		request.setAttribute("page", page);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("addr", adao.selectAddr(paramMap));
+	}
+
+	public Map<String,String> updateAddr(HttpServletRequest request) throws IOException {
+		Map<String,String> param = Command.fromJson(request);
+		Map<String,String> rMap = new HashMap<>();
+		rMap.put("result","false");
+		rMap.put("msg","수정에 실패했습니다.");
+		if(adao.updateAddr(param)==1) {
+			rMap.put("update","true");
+			rMap.put("msg","수정에 성공했습니다.");
+		}
+		return rMap;
+	}
+
+
+	public Map<String,String> deleteAddr(HttpServletRequest request) throws IOException {
+		Map<String,String> param = Command.fromJson(request);
+		Map<String,String> rMap = new HashMap<>();
+		rMap.put("result","false");
+		rMap.put("msg","삭제에 실패했습니다.");
+		if(adao.deleteAddr(param)==1) {
+			rMap.put("delete","true");
+			rMap.put("msg","삭제에 성공했습니다.");
+		}
+		return rMap;
 	}
 }

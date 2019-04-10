@@ -10,44 +10,39 @@
 	<table border="1" id="addrTable">
 		<tr>
 			<th>번호</th>
-			<td>${addr.ad_num}</td>
+			<td><input type = "hidden" id= "adNum" value="${addr.ad_num}">${addr.ad_num}</td>
 		</tr>
 			<tr>
 			<th>주소코드</th>
-			<td>${addr.ad_code}</td>
+			<td><input type = "text" id= "adCode" value="${addr.ad_code}"></td>
 		</tr>	
 			<tr>
 			<th>시도</th>
-			<td>${addr.ad_sido}</td>
+			<td><input type = "text" id= "adSido" value="${addr.ad_sido}"></td>
 		</tr>	
 			<tr>
 			<th>구군</th>
-			<td>${addr.ad_gugun}</td>
+			<td><input type = "text" id= "adGugun" value="${addr.ad_gugun}"></td>
 		</tr>	
 			<tr>
 			<th>동편읍</th>
-			<td>${addr.ad_dong}</td>
+			<td><input type = "text" id= "adDong" value="${addr.ad_dong}"></td>
 		</tr>	
 			<tr>
 			<th>리</th>
-			<td>${addr.ad_lee}</td>
+			<td><input type = "text" id= "adLee" value="${addr.ad_lee}"></td>
 		</tr>
 			<tr>
 			<th>번지</th>
-			<td>${addr.ad_bunji}</td>
+			<td><input type = "text" id= "adBunji" value="${addr.ad_bunji}"></td>
 		</tr>	
 			<tr>
 			<th>호수</th>
-			<td>${addr.ad_ho}</td>
+			<td><input type = "text" id= "adHo" value="${addr.ad_ho}"></td>
 		</tr>
 		<tr>	
-	<td colspan="7"><button onclick="closeTable()">닫기</button></td>
+	<td colspan="7" align="center"><input type="button" onclick="updateAddr()" value="수정">&nbsp;<input type="button" onclick="deleteAddr()" value="삭제">&nbsp;<input type="button" onclick="closeTable()" value="닫기">&nbsp;</td>
 		</tr>	
 	</table>
-<script>
-	function closeTable(){
-		document.querySelector('#addrTable').style.display='none';
-	}
-</script>
 </body>
 </html>
