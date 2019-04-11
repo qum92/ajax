@@ -4,6 +4,9 @@
   <welcome-file-list>
     <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
   </welcome-file-list>
+<!-- <listener>
+  	<listener-class>listener.DemonListener</listener-class>
+  </listener> -->
   <servlet>
     <servlet-name>AJAXServlet</servlet-name>
     <servlet-class>servlet.AJAXServlet</servlet-class>
@@ -12,14 +15,14 @@
     <servlet-name>AJAXServlet</servlet-name>
     <url-pattern>/ajax/*</url-pattern>
   </servlet-mapping>
-  <servlet>
+<!--<servlet>
     <servlet-name>ViewResolverServlet</servlet-name>
     <servlet-class>servlet.ViewResolverServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewResolverServlet</servlet-name>
     <url-pattern>/views/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   <servlet>
     <servlet-name>UserServlet</servlet-name>
     <servlet-class>servlet.UserServlet</servlet-class>
@@ -52,7 +55,7 @@
     <servlet-name>FileServlet</servlet-name>
     <url-pattern>/file/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AddressServlet1</servlet-name>
     <servlet-class>servlet.AddressServlet1</servlet-class>
   </servlet>
@@ -60,7 +63,7 @@
     <servlet-name>AddressServlet1</servlet-name>
     <url-pattern>/addr/*</url-pattern>
   </servlet-mapping>
-      <servlet>
+  <servlet>
     <servlet-name>AddressServlet2</servlet-name>
     <servlet-class>servlet.AddressServlet2</servlet-class>
   </servlet>
@@ -75,7 +78,7 @@
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
   </jsp-config>
-    <filter>
+  <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>filter.EncodingFilter</filter-class>
     <init-param>

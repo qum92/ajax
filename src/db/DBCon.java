@@ -31,15 +31,19 @@ public class DBCon {
 	}
 	
 	public static Connection getCon() {
-		if(con==null) {
-				try {
-					Class.forName(ClASS_NAME);
-					con = DriverManager.getConnection(URL, ID, PASSWORD);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}	
+		try {
+			if(con==null || con.isClosed()) {
+					try {
+						Class.forName(ClASS_NAME);
+						con = DriverManager.getConnection(URL, ID, PASSWORD);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return con;
 	}

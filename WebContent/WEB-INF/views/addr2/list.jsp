@@ -109,9 +109,9 @@
 		}
 		xhr.send(JSON.stringify(params));
 	}
-	function getList(){
+
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET','/addr2/list?pageCount=&page=&ad_dong=');
+	xhr.open('GET','/addr2/list?pageCount=${param.pageCount}&page=${param.page}&ad_dong=${param.ad_dong}');
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4){
 			if(xhr.status==200){
@@ -132,13 +132,25 @@
 				}
 				html +="<tr>";
 				html += '<td colspan="7">';
+				html += '<a href="/views/addr2/list?page='+ 1 +'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ◀◀ </a>'
+				if(res.page>1){
+					html += '<a href="/views/addr2/list?page='+(res.page-10)+'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ◀ </a>'
+				}else{
+					html += '<a href="/views/addr2/list?page='+ 1 +'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ◀ </a>'
+				}
 				for(var i=res.sBlock;i<=res.lBlock;i++){
 					if(i==res.page){
-						html += '<b>[' + i + ']</b>';
+						html += '<b>[' + i + ']</b>';						
 					}else{
 						html += '<a href="/views/addr2/list?pageCount=' + res.pageCount + '&page=' + i + '&ad_dong='+ res.ad_dong +'">[' + i + ']</a>';
 					}
 				}
+				if(res.page<res.totalPageCnt){
+					html += '<a href="/views/addr2/list?page='+(res.page+10)+'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ▶ </a>'
+				}else{
+					html += '<a href="/views/addr2/list?page='+res.totalPageCnt+'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ▶ </a>'
+				}
+				html += '<a href="/views/addr2/list?page='+res.totalPageCnt+'&pageCount='+res.pageCount+'&ad_dong=${param.ad_dong}"> ▶▶ </a>'
 				html += '</td>';
 				html += '</tr>';				
 				document.querySelector('#tBody').innerHTML = html;
@@ -146,8 +158,6 @@
 		}
 	}
 	xhr.send();
-	}
-	getList();
 </script>
 </body>
 </html>

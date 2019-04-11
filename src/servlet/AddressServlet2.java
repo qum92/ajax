@@ -31,6 +31,7 @@ public class AddressServlet2 extends HttpServlet {
 			rMap.put("totalCnt", request.getAttribute("totalCnt"));
 			rMap.put("sBlock", request.getAttribute("sBlock"));
 			rMap.put("lBlock", request.getAttribute("lBlock"));
+			rMap.put("totalPageCnt", request.getAttribute("totalPageCnt"));
 			Command.printJSON(response, rMap);
 		} else if ("view".equals(cmd)) {
 			as.selectAddr(request);
